@@ -3,7 +3,8 @@ local packages = {
 	"keymaps",
 	"setup",
 	"telescope",
-	"lsp"
+	"lsp",
+	"blink",
 }
 
 local user = 'pn00'
