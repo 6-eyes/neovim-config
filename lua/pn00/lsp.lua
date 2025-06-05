@@ -73,6 +73,7 @@ function M.setup()
 	local servers = {
 		clangd = {},
 		rust_analyzer = {},
+		bashls = {},
 		lua_ls = {
 			settings = {
 				Lua = {
@@ -82,10 +83,26 @@ function M.setup()
 		},
 	}
 
+	local ensure_installed = vim.tbl_keys(servers or {})
+	local capabilities = require('blink.cmp').get_lsp_capabilities()
+
 	require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 	require('mason-lspconfig').setup({
 		ensure_installed = {},
 		automatic_enable = true,
+		handlers = {
+			function(server_name)
+				local on_attach = function(client, bufnr)
+					if client.server_capabilities.semanticTokensProvider then
+						vim.lsp.semantic_tokens.start(buf, client.id)
+					end
+				end
+				local server = servers[server_name] or {}
+				server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+				server.on_attach = on_attach
+				require('lspconfig')[server_name].setup(server)
+			end
+		},
 	})
 end
 		

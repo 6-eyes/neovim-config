@@ -26,7 +26,6 @@ rtp:prepend(lazypath)
 
 require('lazy').setup({
 
-
   { -- Fuzzy Finder (files, lsp, etc)
     'nvim-telescope/telescope.nvim',
     event = 'VimEnter',
@@ -80,6 +79,12 @@ require('lazy').setup({
     'saghen/blink.cmp',
     event = 'VimEnter',
     version = '1.*',
+  },
+  {
+    'Yazeed1s/minimal.nvim',
+    config = function()
+      vim.cmd("colorscheme minimal")
+    end,
   },
 }, {
   ui = {

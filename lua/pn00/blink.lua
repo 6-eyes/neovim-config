@@ -1,7 +1,9 @@
 local status_ok, blink = pcall(require, 'blink.cmp')
 if not status_ok then
+	print('blink not found')
 	return
 end
+print('blink found')
 
 blink.setup({
 	keymap = {
@@ -12,16 +14,16 @@ blink.setup({
       ['<C-space>'] = { 'show', 'show_documentation', 'hide_documentation' },
       ['<C-e>'] = { 'hide' },
     },
-    
+
     appearance = {
       use_nvim_cmp_as_default = true,
       nerd_font_variant = 'mono'
     },
-    
+
     sources = {
       default = { 'lsp', 'path' },
     },
-    
+
     completion = {
       accept = {
         auto_brackets = {
@@ -46,7 +48,9 @@ blink.setup({
         enabled = true,
       },
     },
-    
+
+	fuzzy = { implementation = "prefer_rust" },
+
     signature = {
       enabled = true,
       window = {
