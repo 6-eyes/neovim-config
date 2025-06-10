@@ -31,7 +31,7 @@ if vim.g.neovide then
   vim.o.guifont = "Fira Code:h10"
 
   local neovide_options = {
-	neovide_opacity = 0.9,
+	neovide_opacity = 0.95,
 	neovide_scroll_animation_length = 0.2,
 	neovide_hide_mouse_when_typing = true,
 	neovide_theme = "dark",

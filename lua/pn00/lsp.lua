@@ -39,13 +39,16 @@ function M.setup()
 		  --  Useful when you're not sure what type a variable is and you want to see
 		  --  the definition of its *type*, not where it was *defined*.
 		  -- map('gt', require('telescope.builtin').lsp_type_definitions, '[G]oto [T]ype Definition')
+
+		  vim.keymap.set("n", "K", function()
+			vim.lsp.buf.hover { border = "rounded" }
+		  end, { buffer = event.buf, silent = true })
 		end,
 	})
-
 	-- diagnostic config
     vim.diagnostic.config({
 		severity_sort = true,
-		float = { border = 'rounded', source = 'if_many' },
+		float = { border = 'rounded' },
 		underline = { severity = vim.diagnostic.severity.ERROR },
 		signs = vim.g.have_nerd_font and {
 		  text = {
@@ -100,6 +103,11 @@ function M.setup()
 				local server = servers[server_name] or {}
 				server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
 				server.on_attach = on_attach
+				server.handlers = {
+					["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+					  border = "rounded"
+    }),
+				}
 				require('lspconfig')[server_name].setup(server)
 			end
 		},

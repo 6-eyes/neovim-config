@@ -25,7 +25,12 @@ local rtp = vim.opt.rtp
 rtp:prepend(lazypath)
 
 require('lazy').setup({
-
+  {
+    'Yazeed1s/minimal.nvim',
+    config = function()
+      vim.cmd("colorscheme minimal")
+    end,
+  },
   { -- Fuzzy Finder (files, lsp, etc)
     'nvim-telescope/telescope.nvim',
     event = 'VimEnter',
@@ -81,11 +86,12 @@ require('lazy').setup({
     version = '1.*',
   },
   {
-    'Yazeed1s/minimal.nvim',
-    config = function()
-      vim.cmd("colorscheme minimal")
-    end,
-  },
+      'windwp/nvim-autopairs',
+      event = "InsertEnter",
+      config = true
+      -- use opts = {} for passing setup options
+      -- this is equivalent to setup({}) function
+  }
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the

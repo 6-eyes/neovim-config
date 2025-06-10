@@ -1,9 +1,7 @@
 local status_ok, blink = pcall(require, 'blink.cmp')
 if not status_ok then
-	print('blink not found')
 	return
 end
-print('blink found')
 
 blink.setup({
 	keymap = {
