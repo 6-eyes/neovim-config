@@ -12,8 +12,15 @@ end
 
 keymap('n', '<Esc>', '<cmd>nohlsearch<CR>', 'remove highlighting')
 keymap('t', '<Esc><Esc>', '<C-\\><C-n>', 'Exit terminal mode') -- escape terminal mode
+keymap('t', '<A-s>', function ()
+	vim.cmd('split')
+	vim.cmd('terminal')
+end, "Split horizontally and open terminal")
+keymap('t', '<A-v>', function ()
+	vim.cmd('vsplit')
+	vim.cmd('terminal')
+end, "Split horizontally and open terminal")
 
 -- set leader
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
-
